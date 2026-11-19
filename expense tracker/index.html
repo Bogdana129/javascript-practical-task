@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#f7f7ff">
+  <meta name="description"
+        content="Expense Tracker — облік особистих витрат">
+
+  <title>Expense Tracker | Мої фінанси</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="app-container">
+
+    <!-- Шапка сайту -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">💜</span>
+        <h1>Expense Tracker</h1>
+      </div>
+
+      <p class="subtitle">
+        Твої фінанси під контролем
+      </p>
+    </header>
+
+    <main>
+
+      <!-- Загальна статистика -->
+      <section class="dashboard">
+        <div class="balance-card">
+          <div class="card-header">
+            <span>💳 Загальні витрати</span>
+            <span class="card-icon">📊</span>
+          </div>
+
+          <h2 id="totalAmount">0,00 грн</h2>
+          <p>Усі збережені витрати</p>
+        </div>
+
+        <div class="info-card">
+          <span>🧾 Кількість витрат</span>
+          <h3 id="expenseCount">0</h3>
+        </div>
+      </section>
+
+      <!-- Статистика за категоріями -->
+      <section class="statistics">
+        <div class="section-heading">
+          <h2>📈 Статистика витрат</h2>
+          <p>Розподіл за категоріями</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card food">
+            <span>🍔 Їжа</span>
+            <h3 id="foodTotal">0,00 грн</h3>
+          </div>
+
+          <div class="stat-card transport">
+            <span>🚗 Транспорт</span>
+            <h3 id="transportTotal">0,00 грн</h3>
+          </div>
+
+          <div class="stat-card shopping">
+            <span>🛍️ Покупки</span>
+            <h3 id="shoppingTotal">0,00 грн</h3>
+          </div>
+
+          <div class="stat-card other">
+            <span>✨ Інше</span>
+            <h3 id="otherTotal">0,00 грн</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- Форма додавання -->
+      <section class="form-section">
+        <div class="section-heading">
+          <h2>➕ Нова витрата</h2>
+          <p>Додай інформацію про покупку</p>
+        </div>
+
+        <form id="expenseForm" novalidate>
+
+          <div class="form-group">
+            <label for="expenseName">
+              Назва витрати
+            </label>
+
+            <input
+              type="text"
+              id="expenseName"
+              placeholder="Наприклад, кава"
+              maxlength="100"
+              required
+            >
+
+            <small class="error"
+                   id="nameError"
+                   aria-live="polite"></small>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expenseAmount">
+                Сума (грн)
+              </label>
+
+              <input
+                type="number"
+                id="expenseAmount"
+                placeholder="0.00"
+                min="0.01"
+                step="0.01"
+                required
+              >
+
+              <small class="error"
+                     id="amountError"
+                     aria-live="polite"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="expenseCategory">
+                Категорія
+              </label>
+
+              <select id="expenseCategory">
+                <option value="Їжа">
+                  🍔 Їжа
+                </option>
+                <option value="Транспорт">
+                  🚗 Транспорт
+                </option>
+                <option value="Покупки">
+                  🛍️ Покупки
+                </option>
+                <option value="Інше">
+                  ✨ Інше
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit"
+                  class="btn btn-primary">
+            + Додати витрату
+          </button>
+
+        </form>
+      </section>
+
+      <!-- Список витрат -->
+      <section class="expenses-section">
+
+        <div class="section-heading">
+          <h2>📋 Історія витрат</h2>
+          <p>Переглядай та керуй витратами</p>
+        </div>
+
+        <!-- Пошук і фільтрація -->
+        <div class="toolbar">
+
+          <div class="search-box">
+            <label for="searchInput">
+              Пошук витрат
+            </label>
+
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="🔍 Знайти витрату..."
+            >
+          </div>
+
+          <div class="filter-box">
+            <label for="categoryFilter">
+              Фільтр категорій
+            </label>
+
+            <select id="categoryFilter">
+              <option value="all">
+                Усі категорії
+              </option>
+              <option value="Їжа">Їжа</option>
+              <option value="Транспорт">
+                Транспорт
+              </option>
+              <option value="Покупки">
+                Покупки
+              </option>
+              <option value="Інше">Інше</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Список створюється через JavaScript -->
+        <div id="expenseList"
+             class="expense-list"
+             aria-live="polite">
+        </div>
+
+        <!-- Повідомлення про порожній список -->
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">📭</div>
+          <h3>Поки що витрат немає</h3>
+          <p>Додай свою першу витрату!</p>
+        </div>
+
+        <!-- Очищення -->
+        <div class="expenses-footer">
+          <button
+            type="button"
+            id="clearAllBtn"
+            class="btn btn-danger">
+            🗑️ Очистити всі витрати
+          </button>
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p>Expense Tracker © 2026</p>
+      <p>Керуй грошима розумно 💜</p>
+    </footer>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f6ff">
+  <meta name="description"
+        content="Інтерактивна навчальна форма реєстрації">
+
+  <title>JoinSpace | Реєстрація</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main class="page">
+
+    <section class="register-card"
+             aria-labelledby="pageTitle">
+
+      <!-- Бренд -->
+      <header class="brand-header">
+        <div class="brand">
+          <span class="brand-icon"
+                aria-hidden="true">✦</span>
+          <span class="brand-name">JoinSpace</span>
+        </div>
+
+        <span class="demo-badge">Demo</span>
+      </header>
+
+      <!-- Заголовок -->
+      <div class="form-header">
+        <div class="welcome-icon"
+             aria-hidden="true">👋</div>
+
+        <h1 id="pageTitle">Створити акаунт</h1>
+
+        <p>
+          Заповни кілька полів, щоб завершити
+          демонстраційну реєстрацію.
+        </p>
+      </div>
+
+      <!-- Прогрес -->
+      <div class="progress-section">
+        <div class="progress-heading">
+          <span>Заповнення форми</span>
+          <span id="progressText">0%</span>
+        </div>
+
+        <div class="progress-track"
+             role="progressbar"
+             id="formProgress"
+             aria-label="Прогрес заповнення"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             aria-valuenow="0">
+          <div class="progress-fill"
+               id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- Форма -->
+      <form id="registrationForm" novalidate>
+
+        <!-- Ім'я -->
+        <div class="form-group">
+          <div class="label-row">
+            <label for="username">
+              Ім'я користувача
+            </label>
+
+            <span class="field-counter"
+                  id="usernameCounter">0/30</span>
+          </div>
+
+          <div class="input-wrapper">
+            <span class="input-icon"
+                  aria-hidden="true">👤</span>
+
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Наприклад, Богдана"
+              autocomplete="username"
+              minlength="3"
+              maxlength="30"
+              aria-describedby="usernameError"
+              required>
+          </div>
+
+          <small class="error"
+                 id="usernameError"
+                 aria-live="polite"></small>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+
+          <div class="input-wrapper">
+            <span class="input-icon"
+                  aria-hidden="true">✉️</span>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="example@gmail.com"
+              autocomplete="email"
+              aria-describedby="emailError"
+              required>
+          </div>
+
+          <small class="error"
+                 id="emailError"
+                 aria-live="polite"></small>
+        </div>
+
+        <!-- Пароль -->
+        <div class="form-group">
+          <label for="password">Пароль</label>
+
+          <div class="input-wrapper password-wrapper">
+            <span class="input-icon"
+                  aria-hidden="true">🔒</span>
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Створи надійний пароль"
+              autocomplete="new-password"
+              minlength="8"
+              aria-describedby="passwordRules passwordError"
+              required>
+
+            <button
+              type="button"
+              class="toggle-password"
+              data-target="password"
+              aria-label="Показати пароль"
+              aria-pressed="false">
+              👁
+            </button>
+          </div>
+
+          <!-- Надійність -->
+          <div class="password-strength">
+            <div class="strength-heading">
+              <span>Надійність пароля</span>
+              <span id="strengthText">
+                Не введено
+              </span>
+            </div>
+
+            <div class="strength-track">
+              <span id="strengthFill"></span>
+            </div>
+          </div>
+
+          <!-- Правила пароля -->
+          <div class="password-rules"
+               id="passwordRules">
+
+            <p class="rules-title">
+              Рекомендації для пароля:
+            </p>
+
+            <div class="rule"
+                 id="ruleLength">
+              <span class="rule-icon">○</span>
+              Мінімум 8 символів
+            </div>
+
+            <div class="rule"
+                 id="ruleUppercase">
+              <span class="rule-icon">○</span>
+              Велика літера
+            </div>
+
+            <div class="rule"
+                 id="ruleNumber">
+              <span class="rule-icon">○</span>
+              Хоча б одна цифра
+            </div>
+
+            <div class="rule"
+                 id="ruleSpecial">
+              <span class="rule-icon">○</span>
+              Спеціальний символ
+            </div>
+          </div>
+
+          <small class="error"
+                 id="passwordError"
+                 aria-live="polite"></small>
+        </div>
+
+        <!-- Підтвердження -->
+        <div class="form-group">
+          <label for="confirmPassword">
+            Підтвердження пароля
+          </label>
+
+          <div class="input-wrapper password-wrapper">
+            <span class="input-icon"
+                  aria-hidden="true">🔐</span>
+
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Повтори пароль"
+              autocomplete="new-password"
+              aria-describedby="confirmPasswordError"
+              required>
+
+            <button
+              type="button"
+              class="toggle-password"
+              data-target="confirmPassword"
+              aria-label="Показати пароль"
+              aria-pressed="false">
+              👁
+            </button>
+          </div>
+
+          <small class="error"
+                 id="confirmPasswordError"
+                 aria-live="polite"></small>
+        </div>
+
+        <!-- Умови -->
+        <div class="terms-group">
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              id="terms"
+              name="terms"
+              aria-describedby="termsError"
+              required>
+
+            <span>
+              Я погоджуюсь з умовами
+              демонстраційної реєстрації
+            </span>
+          </label>
+
+          <small class="error"
+                 id="termsError"
+                 aria-live="polite"></small>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="form-actions">
+          <button
+            type="submit"
+            class="submit-btn"
+            id="submitBtn">
+            Створити акаунт
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <button
+            type="reset"
+            class="reset-btn"
+            id="resetBtn">
+            Очистити форму
+          </button>
+        </div>
+
+        <!-- Повідомлення -->
+        <div
+          id="formMessage"
+          class="form-message"
+          role="status"
+          aria-live="polite">
+        </div>
+
+      </form>
+
+      <footer class="card-footer">
+        <span aria-hidden="true">🔐</span>
+        <p>
+          Навчальна форма без створення
+          реального облікового запису.
+          Паролі не зберігаються.
+        </p>
+      </footer>
+
+    </section>
+  </main>
+</body>
+</html>
